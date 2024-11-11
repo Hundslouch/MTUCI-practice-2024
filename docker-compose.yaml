@@ -1,0 +1,18 @@
+services:
+  tgbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - db
+  db:
+    image: postgres:16-alpine
+    ports:
+      - 1313:5432
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+volumes:
+  db_data:
